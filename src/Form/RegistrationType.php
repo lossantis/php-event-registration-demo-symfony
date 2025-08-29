@@ -21,28 +21,28 @@ class RegistrationType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Your name',
+                'label' => 'form.registration.name',
                 'required' => true,
                 'constraints' => [new Assert\NotBlank()],
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Work email',
+                'label' => 'form.registration.email',
                 'required' => true,
                 'constraints' => [new Assert\NotBlank(), new Assert\Email()],
             ])
             ->add('plusOne', CheckboxType::class, [
-                'label' => 'Bringing a plus one?',
+                'label' => 'form.registration.plus_one',
                 'required' => false,
             ])
             ->add('numberOfKids', IntegerType::class, [
-                'label' => 'Number of kids',
+                'label' => 'form.registration.number_of_kids',
                 'required' => false,
                 'empty_data' => '0',
                 'attr' => ['min' => 0],
                 'constraints' => [new Assert\PositiveOrZero()],
             ])
             ->add('numberOfVegetarians', IntegerType::class, [
-                'label' => 'Number of vegetarians',
+                'label' => 'form.registration.number_of_vegetarians',
                 'required' => false,
                 'empty_data' => '0',
                 'attr' => ['min' => 0],
@@ -51,7 +51,7 @@ class RegistrationType extends AbstractType
                 ],
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Register',
+                'label' => 'form.registration.submit',
                 'attr' => ['class' => 'btn btn-primary']
             ])
         ;

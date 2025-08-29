@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register - {{ department }}{% endblock %}
+{% block title %}{{ 'form.registration.title'|trans({'%department%': department}) }}{% endblock %}
 
 {% block body %}
     <div class="row">
         <div class="col-md-8 col-lg-6">
-            <h1 class="mb-3">Department: {{ department }}</h1>
+            <h1 class="mb-3">{{ 'form.registration.department_label'|trans({'%department%': department}) }}</h1>
 
             {% for label, messages in app.flashes %}
                 <div class="alert alert-{{ label }}">
                     {% for message in messages %}
-                        {{ message }}
+                        {{ message|trans }}
                     {% endfor %}
                 </div>
             {% endfor %}

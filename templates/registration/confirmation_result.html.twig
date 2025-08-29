@@ -1,21 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Registration Confirmation{% endblock %}
+{% block title %}{{ 'confirmation.title'|trans }}{% endblock %}
 
 {% block body %}
 <div class="row">
     <div class="col-md-8 col-lg-6">
-        <h1>Registration Confirmation</h1>
+        <h1>{{ 'confirmation.heading'|trans }}</h1>
         {% if status == 'success' %}
-            <div class="alert alert-success">Your registration has been confirmed. Thank you!</div>
+            <div class="alert alert-success">{{ 'confirmation.success'|trans }}</div>
         {% elseif status == 'expired' %}
-            <div class="alert alert-warning">Sorry, this confirmation link has expired. Please submit a new registration.</div>
+            <div class="alert alert-warning">{{ 'confirmation.expired'|trans }}</div>
         {% elseif status == 'already' %}
-            <div class="alert alert-info">This registration was already confirmed.</div>
+            <div class="alert alert-info">{{ 'confirmation.already'|trans }}</div>
         {% else %}
-            <div class="alert alert-danger">Invalid confirmation link.</div>
+            <div class="alert alert-danger">{{ 'confirmation.invalid'|trans }}</div>
         {% endif %}
-        <a href="{{ path('app_home') }}" class="btn btn-secondary mt-3">Back to home</a>
+        <a href="{{ path('app_home') }}" class="btn btn-secondary mt-3">{{ 'confirmation.back_home'|trans }}</a>
     </div>
 </div>
 {% endblock %}

@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home | Randstad{% endblock %}
+{% block title %}{{ 'home.title'|trans }}{% endblock %}
 
 {% block body %}
     <div class="py-5 text-center">
-        <h1 class="display-5">Welcome to Randstad Digital Family Event</h1>
-        <p class="lead">Use the navigation or forms to register your attendance.</p>
+        <h1 class="display-5">{{ 'home.heading'|trans }}</h1>
+        <p class="lead">{{ 'home.lead'|trans }}</p>
     </div>
 {% endblock %}

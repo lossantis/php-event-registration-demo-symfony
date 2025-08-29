@@ -56,7 +56,8 @@ class RegistrationController extends AbstractController
             // Dispatch async email
             $bus->dispatch(new SendRegistrationConfirmation($registration->getId()));
 
-            $this->addFlash('success', 'Registration successful. The confirmation link will be sent to your email within a few minutes.');
+            // Store translation key; Twig will translate flash messages via |trans in base template
+            $this->addFlash('success', 'flash.registration.success');
             return $this->redirectToRoute('app_home');
         }
 

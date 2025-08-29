@@ -1,0 +1,45 @@
+# Navigation
+nav:
+  brand: "Randstad"
+  registration: "Registration"
+  home: "Home"
+
+# Home page
+home:
+  title: "Home | Randstad"
+  heading: "Welcome to Randstad Digital Family Event"
+  lead: "Use the navigation or forms to register your attendance."
+
+# Registration index
+registration:
+  choose_department_title: "Choose Department"
+  choose_department_heading: "Choose your department"
+  choose_department_help: "Select your department to proceed to the registration form."
+  no_departments: "No departments are configured."
+
+# Registration form
+form:
+  registration:
+    title: "Register - %department%"
+    department_label: "Department: %department%"
+    name: "Your name"
+    email: "Work email"
+    plus_one: "Bringing a plus one?"
+    number_of_kids: "Number of kids"
+    number_of_vegetarians: "Number of vegetarians"
+    submit: "Register"
+
+# Flash messages
+flash:
+  registration:
+    success: "Registration successful. The confirmation link will be sent to your email within a few minutes."
+
+# Confirmation page
+confirmation:
+  title: "Registration Confirmation"
+  heading: "Registration Confirmation"
+  success: "Your registration has been confirmed. Thank you!"
+  expired: "Sorry, this confirmation link has expired. Please submit a new registration."
+  already: "This registration was already confirmed."
+  invalid: "Invalid confirmation link."
+  back_home: "Back to home"
