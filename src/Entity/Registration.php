@@ -49,6 +49,15 @@ class Registration
     #[Assert\NotBlank(message: 'Department is required.')]
     private string $department;
 
+    #[ORM\Column(name: 'confirmation_token', type: 'string', length: 64, nullable: true)]
+    private ?string $confirmationToken = null;
+
+    #[ORM\Column(name: 'confirmation_sent_at', type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $confirmationSentAt = null;
+
+    #[ORM\Column(name: 'confirmed_at', type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $confirmedAt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -124,5 +133,43 @@ class Registration
     {
         $this->department = $department;
         return $this;
+    }
+
+    public function getConfirmationToken(): ?string
+    {
+        return $this->confirmationToken;
+    }
+
+    public function setConfirmationToken(?string $confirmationToken): self
+    {
+        $this->confirmationToken = $confirmationToken;
+        return $this;
+    }
+
+    public function getConfirmationSentAt(): ?\DateTimeInterface
+    {
+        return $this->confirmationSentAt;
+    }
+
+    public function setConfirmationSentAt(?\DateTimeInterface $confirmationSentAt): self
+    {
+        $this->confirmationSentAt = $confirmationSentAt;
+        return $this;
+    }
+
+    public function getConfirmedAt(): ?\DateTimeInterface
+    {
+        return $this->confirmedAt;
+    }
+
+    public function setConfirmedAt(?\DateTimeInterface $confirmedAt): self
+    {
+        $this->confirmedAt = $confirmedAt;
+        return $this;
+    }
+
+    public function isConfirmed(): bool
+    {
+        return null !== $this->confirmedAt;
     }
 }

@@ -22,4 +22,13 @@ class RegistrationRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function remove(Registration $entity, bool $flush = false): void
+    {
+        $em = $this->getEntityManager();
+        $em->remove($entity);
+        if ($flush) {
+            $em->flush();
+        }
+    }
 }

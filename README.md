@@ -27,6 +27,7 @@ The employees should be able to register for this event in a user friendly way.
 ## Starting/Stoping the project
 * Run `ddev start` to spin up the project.
 * Run `ddev launch` to open your project in a browser.
+* Run `ddev exec -s web php bin/console messenger:consume async -vv` to run the messenger service.
 * Run `ddev stop` to stop the project.`
 
 ## Run migrations
@@ -40,12 +41,14 @@ The employees should be able to register for this event in a user friendly way.
 ### Mailer endpoint
 (https://randstad.ddev.site:8026/)[https://randstad.ddev.site:8026/]
 
-Configure default sender address (required by some SMTP servers):
-- Set MAIL_FROM_ADDRESS in your environment (e.g. in .env.local):
+Configure defaults for mailer, messenger and URL generation in CLI:
+- Set these in your environment (e.g. in .env.local):
 
 ```
 MAIL_FROM_ADDRESS=no-reply@randstad.ddev.site
-MAILER_DSN="smtp://mailpit:1025"
+MAILER_DSN="smtp://127.0.0.1:1025"
+MESSENGER_TRANSPORT_DSN="doctrine://default"
+APP_URL="https://randstad.ddev.site"
 ```
 ## CI/CD
 ### Rector instantly upgrades and refactors the PHP code of your application

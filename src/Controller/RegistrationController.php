@@ -6,12 +6,14 @@ namespace App\Controller;
 
 use App\Entity\Registration;
 use App\Form\RegistrationType;
+use App\Message\SendRegistrationConfirmation;
 use App\Repository\RegistrationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -24,7 +26,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/registration/{department}', name: 'app_registration_new', methods: ['GET', 'POST'])]
-    public function new(string $department, Request $request, RegistrationRepository $registrationRepository, #[Autowire(param: 'app.allowed_departments')] array $allowedDepartments): Response
+    public function new(string $department, Request $request, RegistrationRepository $registrationRepository, MessageBusInterface $bus, #[Autowire(param: 'app.allowed_departments')] array $allowedDepartments): Response
     {
         // Validate department against allowed list (case-insensitive)
         $allowedDepartments = $allowedDepartments ?? [];
@@ -45,8 +47,16 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Generate confirmation token and timestamp
+            $registration->setConfirmationToken(self::generateToken());
+            $registration->setConfirmationSentAt(new \DateTimeImmutable());
+
             $registrationRepository->save($registration, true);
-            $this->addFlash('success', 'Thank you! Your registration has been received.');
+
+            // Dispatch async email
+            $bus->dispatch(new SendRegistrationConfirmation($registration->getId()));
+
+            $this->addFlash('success', 'Registration successful. The confirmation link will be sent to your email within a few minutes.');
             return $this->redirectToRoute('app_home');
         }
 
@@ -54,5 +64,50 @@ class RegistrationController extends AbstractController
             'form' => $form->createView(),
             'department' => $canonicalDepartment,
         ]);
+    }
+
+    #[Route('/registration/confirm/{token}', name: 'app_registration_confirm', methods: ['GET'])]
+    public function confirm(string $token, RegistrationRepository $registrationRepository): Response
+    {
+        $registration = $registrationRepository->findOneBy(['confirmationToken' => $token]);
+        if (!$registration) {
+            return $this->render('registration/confirmation_result.html.twig', [
+                'status' => 'invalid',
+            ]);
+        }
+
+        // check already confirmed
+        if ($registration->isConfirmed()) {
+            return $this->render('registration/confirmation_result.html.twig', [
+                'status' => 'already',
+                'registration' => $registration,
+            ]);
+        }
+
+        $sentAt = $registration->getConfirmationSentAt();
+        $expiresAt = $sentAt ? (clone $sentAt)->modify('+24 hours') : null;
+        if (!$expiresAt || new \DateTimeImmutable() > $expiresAt) {
+            // Delete the registration if the confirmation link has expired
+            $registrationRepository->remove($registration, true);
+            return $this->render('registration/confirmation_result.html.twig', [
+                'status' => 'expired',
+                'registration' => $registration,
+            ]);
+        }
+
+        $registration->setConfirmedAt(new \DateTimeImmutable());
+        $registration->setConfirmationToken(null);
+        $registrationRepository->save($registration, true);
+
+        return $this->render('registration/confirmation_result.html.twig', [
+            'status' => 'success',
+            'registration' => $registration,
+        ]);
+    }
+
+    private static function generateToken(): string
+    {
+        // 32-char hex token
+        return bin2hex(random_bytes(16));
     }
 }

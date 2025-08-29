@@ -25,6 +25,7 @@ services:
         resource: '../src/'
         bind:
             $allowedDepartments: '%app.allowed_departments%'
+            $defaultFrom: '%app.mail_from%'
 
     # Nelmio security
     App\CustomService:
