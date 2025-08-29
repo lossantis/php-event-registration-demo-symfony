@@ -47,12 +47,12 @@ MAILER_DSN="smtp://mailpit:1025"
 ## CI/CD
 ### Rector instantly upgrades and refactors the PHP code of your application
 ```shell
-    ddev exec -s web ./vendor/bin/rector process`
+    ddev exec -s web ./vendor/bin/rector process
 ```
 
 ### PHP-CS-Fixer automatically fixes your code to follow the coding standards
 ```shell
-    ddev exec -s web ./vendor/bin/php-cs-fixer fix src`
+    ddev exec -s web ./vendor/bin/php-cs-fixer fix src
 ```
 
 ## Utils
