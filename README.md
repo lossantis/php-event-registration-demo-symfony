@@ -56,6 +56,12 @@ MAILER_DSN="smtp://mailpit:1025"
 ```
 
 ## Utils
+### Database configuration
+* host: 127.0.0.1
+* port: 33066
+* user: root
+* password: root
+
 ### Symfony commands
 * Clear cache
 ```shell
