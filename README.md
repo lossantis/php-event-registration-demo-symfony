@@ -34,6 +34,16 @@ The employees should be able to register for this event in a user friendly way.
 ### Project endpoint
 (https://randstad.ddev.site)[https://randstad.ddev.site]
 
+### Mailer endpoint
+(https://randstad.ddev.site:8026/)[https://randstad.ddev.site:8026/]
+
+Configure default sender address (required by some SMTP servers):
+- Set MAIL_FROM_ADDRESS in your environment (e.g. in .env.local):
+
+```
+MAIL_FROM_ADDRESS=no-reply@randstad.ddev.site
+MAILER_DSN="smtp://mailpit:1025"
+```
 ## CI/CD
 ### Rector instantly upgrades and refactors the PHP code of your application
 ```shell
@@ -43,6 +53,13 @@ The employees should be able to register for this event in a user friendly way.
 ### PHP-CS-Fixer automatically fixes your code to follow the coding standards
 ```shell
     ddev exec -s web ./vendor/bin/php-cs-fixer fix src`
+```
+
+## Utils
+### Symfony commands
+* Clear cache
+```shell
+  ddev php bin/console cache:clear
 ```
 
 ## Contributing

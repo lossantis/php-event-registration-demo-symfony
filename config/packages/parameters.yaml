@@ -1,0 +1,2 @@
+parameters:
+    app.mail_from: '%env(resolve:MAIL_FROM_ADDRESS)%'

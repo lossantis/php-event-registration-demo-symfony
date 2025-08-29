@@ -13,6 +13,11 @@ use_dns_when_possible: true
 composer_version: "2"
 web_environment: []
 corepack_enable: false
+web_extra_daemons:
+    - name: "messenger"
+      command: "php bin/console messenger:consume async -vv"
+      directory: /var/www/html
+host_db_port: 33066
 
 # Key features of DDEV's config.yaml:
 

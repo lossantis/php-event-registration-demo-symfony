@@ -1,0 +1,5 @@
+framework:
+    messenger:
+        # In dev, also use the async transport to test background processing
+        routing:
+            Symfony\Component\Mailer\Messenger\SendEmailMessage: async
