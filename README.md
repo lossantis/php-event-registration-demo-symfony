@@ -21,6 +21,9 @@ The employees should be able to register for this event in a user friendly way.
 - [Docker](https://docs.docker.com/get-docker/)
 * [DDev](https://docs.ddev.com/en/stable/users/quickstart/#symfony)
 
+## Before you start
+* copy .env to .env.local
+
 ## Starting/Stoping the project
 * Run `ddev start` to spin up the project.
 * Run `ddev launch` to open your project in a browser.

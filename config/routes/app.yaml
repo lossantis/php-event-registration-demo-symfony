@@ -1,0 +1,5 @@
+controllers:
+    resource: ../../src/Controller/
+    type: attribute
+
+# Optionally, you can define a fallback route or other routes here.

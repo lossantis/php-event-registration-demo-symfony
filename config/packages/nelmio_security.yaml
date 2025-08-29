@@ -29,6 +29,19 @@ nelmio_security:
                 - 'none'
             script-src:
                 - 'self'
+                - 'https://cdn.jsdelivr.net'
+            style-src:
+                - 'self'
+                - 'https://cdn.jsdelivr.net'
+                - 'unsafe-inline'
+            font-src:
+                - 'self'
+                - 'https://cdn.jsdelivr.net'
+            connect-src:
+                - 'self'
+            img-src:
+                - 'self'
+                - 'data:'
             block-all-mixed-content: true # defaults to false, blocks HTTP content over HTTPS transport
             # upgrade-insecure-requests: true # defaults to false, upgrades HTTP requests to HTTPS transport
         report:
@@ -41,6 +54,17 @@ nelmio_security:
             report-uri: '%router.request_context.base_url%/nelmio/csp/report'
             script-src:
                 - 'self'
+                - 'https://cdn.jsdelivr.net'
+            style-src:
+                - 'self'
+                - 'https://cdn.jsdelivr.net'
+                - 'unsafe-inline'
+            font-src:
+                - 'self'
+                - 'https://cdn.jsdelivr.net'
+            img-src:
+                - 'self'
+                - 'data:'
 
     # disables content type sniffing for script resources
     content_type:
