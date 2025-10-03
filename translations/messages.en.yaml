@@ -1,13 +1,13 @@
 # Navigation
 nav:
-  brand: "Randstad"
+  brand: "Company Event"
   registration: "Registration"
   home: "Home"
 
 # Home page
 home:
-  title: "Home | Randstad"
-  heading: "Welcome to Randstad Digital Family Event"
+  title: "Home | Event"
+  heading: "Welcome to the Company Family Event"
   lead: "Use the navigation or forms to register your attendance."
 
 # Registration index
